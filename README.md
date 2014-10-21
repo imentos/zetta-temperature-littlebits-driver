@@ -23,7 +23,9 @@ zetta()
 
 ###Transitions
 
-#####do
+#####do(message)
+
+Calls the device's log() function passing the message param.
 
 ###Design
 
