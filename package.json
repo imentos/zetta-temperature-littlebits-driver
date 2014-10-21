@@ -1,0 +1,31 @@
+{
+  "name": "zetta-starter-device-driver",
+  "version": "0.1.0",
+  "description": "Zetta starter device driver for any platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brian Mulloy <brian@landlessness.net>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/landlessness/zetta-starter-device-driver.git"
+  },
+  "dependencies": {
+    "zetta-device": "*",
+    "zetta-scout": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/landlessness/zetta-starter-device-driver/issues"
+  },
+  "homepage": "https://github.com/landlessness/zetta-starter-device-driver",
+  "directories": {
+    "examples": "examples"
+  },
+  "keywords": [
+    "zetta",
+    "starter device",
+    "any platform"
+  ]
+}
