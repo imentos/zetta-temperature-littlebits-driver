@@ -1,5 +1,5 @@
 {
-  "name": "starter device example",
+  "name": "zetta-starter-device-driver-example",
   "version": "0.1.0",
   "description": "an example for using the starter device",
   "main": "server.js",
