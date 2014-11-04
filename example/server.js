@@ -1,6 +1,6 @@
 var zetta = require('zetta');
 var StarterDevice = require('../index');
-var app = require('./app');
+var app = require('./apps/starter_app');
 
 zetta()
   .use(StarterDevice)
