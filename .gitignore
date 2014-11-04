@@ -1,9 +1,9 @@
 node_modules/
-examples/node_modules/
-examples/.registry/*
-examples/.registry/medea.lock
-examples/.peers/*
-examples/.peers/medea.lock
+example/node_modules/
+example/.registry/*
+example/.registry/medea.lock
+example/.peers/*
+example/.peers/medea.lock
 .registry/*
 .registry/medea.lock
 .peers/*
