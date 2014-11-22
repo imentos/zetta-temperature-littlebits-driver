@@ -8,7 +8,19 @@ var StarterDeviceScout = module.exports = function() {
 util.inherits(StarterDeviceScout, Scout);
 
 StarterDeviceScout.prototype.init = function(next) {
+
   var self = this;
-  self.discover(StarterDevice, {default: 'DEFAULT'});
+
+  var query = this.server.where({type: 'starter'});
+
+  this.server.find(query, function(err, results) {
+    if (results[0]) {
+      self.provision(results[0], StarterDevice, {default: 'DEFAULT'});
+    } else {
+      self.discover(StarterDevice, {default: 'DEFAULT'});
+    }
+  });
+
   next();
-}
+
+};
