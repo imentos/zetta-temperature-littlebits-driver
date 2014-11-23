@@ -1,6 +1,8 @@
 module.exports = function testApp(server) {
   
-  var starterDeviceQuery = server.where({type: 'starter'});
+  // add query params in the where object like so:
+  // var starterDeviceQuery = server.where({type: 'led'});
+  var starterDeviceQuery = server.where({});
   
   server.observe([starterDeviceQuery], function(starterDevice){
     setInterval(function(){
