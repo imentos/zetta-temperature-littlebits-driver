@@ -7,7 +7,7 @@ module.exports = function testApp(server) {
   server.observe([starterDeviceQuery], function(starterDevice){
     setInterval(function(){
       starterDevice.call('do', './example/apps/starter_app.js is running', function() {});
-    }, 5000);
+    }, 1000);
   });
   
 }
