@@ -1,7 +1,7 @@
 {
-  "name": "zetta-starter-device-driver",
+  "name": "zetta-starter-driver",
   "version": "0.1.0",
-  "description": "Zetta starter device driver for any platform",
+  "description": "Zetta starter driver for any platform",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +16,7 @@
   },
   "keywords": [
     "zetta",
-    "starter device",
+    "starter",
     "any platform"
   ]
 }

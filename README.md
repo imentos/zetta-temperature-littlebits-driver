@@ -1,19 +1,19 @@
-##Zetta starter device driver for any platform
+##Zetta starter driver for any platform
 
 ###Install
 
 ```
-$> npm install zetta-starter-device-driver
+$> git clone https://github.com/zettajs/zetta-starter-driver zetta-{device}-{platform}-driver
 ```
 
 ###Usage
 
 ```
 var zetta = require('zetta');
-var StarterDevice = require('zetta-starter-device-driver');
+var Starter = require('zetta-starter-driver');
 
 zetta()
-  .use(StarterDevice)
+  .use(Starter)
   .listen(1337)
 ```
 
