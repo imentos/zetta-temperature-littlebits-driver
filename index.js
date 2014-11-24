@@ -12,12 +12,13 @@ StarterScout.prototype.init = function(next) {
   var self = this;
 
   var query = this.server.where({type: 'starter'});
+  var options = {default: 'DEFAULT'};
 
   this.server.find(query, function(err, results) {
     if (results[0]) {
-      self.provision(results[0], Starter, {default: 'DEFAULT'});
+      self.provision(results[0], Starter, options);
     } else {
-      self.discover(Starter, {default: 'DEFAULT'});
+      self.discover(Starter, options);
     }
   });
 
