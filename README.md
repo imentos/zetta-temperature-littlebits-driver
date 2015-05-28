@@ -1,32 +1,23 @@
-##Zetta starter driver for any platform
+##Zetta temperature driver for LittleBits
 
 ###Install
 
 ```
-$> git clone https://github.com/zettajs/zetta-starter-driver zetta-{device}-{platform}-driver
+$> git clone https://github.com/imentos/zetta-temperature-littlebits-driver.git
 ```
 
 ###Usage
 
 ```
 var zetta = require('zetta');
-var Starter = require('zetta-starter-driver');
+var Temperature = require('zetta-temperature-littlebits-driver');
 
 zetta()
-  .use(Starter)
+  .use(Temperature)
   .listen(1337)
 ```
 
 ### Hardware
 
-* any platform
+* LittleBits
 
-###Transitions
-
-#####do(message)
-
-Calls the device's log() function passing the message param.
-
-###Design
-
-This device driver is designed to be the starter code for other device drivers.

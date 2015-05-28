@@ -8,6 +8,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "https-proxy-agent": "^0.3.5",
     "johnny-five": "^0.8.24",
     "zetta-device": "^0.11.0"
   },
