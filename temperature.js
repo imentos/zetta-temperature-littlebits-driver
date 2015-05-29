@@ -1,5 +1,5 @@
 var five = require("johnny-five"),
-    board, sensor;
+    board, led, sensor;
 board = new five.Board();
 
 
@@ -23,11 +23,13 @@ Temperature.prototype.init = function(config) {
     board.on("ready", function() {
         sensor = new five.Sensor({
             pin: "A1",
-            freq: 250
+            freq: 500
         });
-        sensor.on("data", function() {
-            self.pulse = this.raw;
-            console.log("sensor reading " + this.raw);
+        led = new five.Led(9);
+        sensor.on("data", function(err, value) {
+            self.pulse = 100 * this.raw / 1023;
+            console.log("sensor reading " + self.pulse);
+            //led.brightness(self.pulse);
         });
     });
 };
