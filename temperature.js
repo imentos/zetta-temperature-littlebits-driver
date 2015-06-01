@@ -1,5 +1,5 @@
 var five = require("johnny-five"),
-    board, led, sensor;
+    board, led, sensor, button;
 board = new five.Board();
 
 
@@ -32,4 +32,33 @@ Temperature.prototype.init = function(config) {
             //led.brightness(self.pulse);
         });
     });
+
+
+    button = new five.Button(0);
+    button.on("press", function(value) {
+        console.log("wake up");
+        push.sendToChannels(["dubai"], {
+            "alert": "Congratulations! low electriciy usage yesterday."
+        }, function(error, data) {
+            if (error) {
+                console.error("Oh no it went wrong!: " + error.message);
+            }
+        });
+    });
+
+    var button = new five.Button({
+        pin: "A0"
+    });
+    button.on("press", function(value) {
+        console.log("late bus");
+        push.sendToChannels(["dubai"], {
+            "alert": "The bus late because of accident.",
+            category: "BUS_LATE_CATEGORY"
+        }, function(error, data) {
+            if (error) {
+                console.error("Oh no it went wrong!: " + error.message);
+            }
+        });
+    });
+
 };
