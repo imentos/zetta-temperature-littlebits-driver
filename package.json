@@ -10,6 +10,7 @@
   "dependencies": {
     "https-proxy-agent": "^0.3.5",
     "johnny-five": "^0.8.24",
+    "parse-push": "0.0.3",
     "zetta-device": "^0.11.0"
   },
   "directories": {

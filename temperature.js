@@ -2,9 +2,11 @@ var five = require("johnny-five"),
     board, led, sensor, button;
 board = new five.Board();
 
-
-
-
+var Push = require("parse-push");
+var push = new Push({
+    applicationId: "1guPOUReZkTlAnP3rRloTumvR59YmfLB9VaNqMZi",
+    restApiKey: "4V2LbQWJrfMqdipL3QyNSXAf8i3IJrSiMadFjeXH"
+});
 
 var Device = require('zetta-device');
 var util = require('util');
@@ -31,34 +33,34 @@ Temperature.prototype.init = function(config) {
             console.log("sensor reading " + self.pulse);
             //led.brightness(self.pulse);
         });
-    });
 
+        // wake up notification
+        button = new five.Button(0);
+        button.on("press", function(value) {
+            console.log("wake up");
+            push.sendToChannels(["dubai"], {
+                "alert": "Congratulations! low electriciy usage yesterday."
+            }, function(error, data) {
+                if (error) {
+                    console.error("Oh no it went wrong!: " + error.message);
+                }
+            });
+        });
 
-    button = new five.Button(0);
-    button.on("press", function(value) {
-        console.log("wake up");
-        push.sendToChannels(["dubai"], {
-            "alert": "Congratulations! low electriciy usage yesterday."
-        }, function(error, data) {
-            if (error) {
-                console.error("Oh no it went wrong!: " + error.message);
-            }
+        // late bus notification
+        var button = new five.Button({
+            pin: "A0"
+        });
+        button.on("press", function(value) {
+            console.log("late bus");
+            push.sendToChannels(["dubai"], {
+                "alert": "The bus late because of accident.",
+                category: "BUS_LATE_CATEGORY"
+            }, function(error, data) {
+                if (error) {
+                    console.error("Oh no it went wrong!: " + error.message);
+                }
+            });
         });
     });
-
-    var button = new five.Button({
-        pin: "A0"
-    });
-    button.on("press", function(value) {
-        console.log("late bus");
-        push.sendToChannels(["dubai"], {
-            "alert": "The bus late because of accident.",
-            category: "BUS_LATE_CATEGORY"
-        }, function(error, data) {
-            if (error) {
-                console.error("Oh no it went wrong!: " + error.message);
-            }
-        });
-    });
-
 };
