@@ -16,6 +16,15 @@ pubnub.subscribe({
     channel: 'dubai-led',
     callback: function(m) {
         console.log(m);
+        if (led == null) {
+        	return;
+        }
+        var result = JSON.parse(m);
+        if (result.led == "on") {
+        	led.on();
+        } else {
+        	led.off();
+        }
     }
 });
 
@@ -49,15 +58,6 @@ Temperature.prototype.init = function(config) {
         // wake up notification
         button = new five.Button(0);
         button.on("press", function(value) {
-            pubnub.publish({
-                channel: 'demo_tutorial',
-                message: {
-                    "color": "blue"
-                }
-            });
-
-
-
             console.log("wake up");
             push.sendToChannels(["dubai"], {
                 "alert": "Congratulations! low electriciy usage yesterday."
