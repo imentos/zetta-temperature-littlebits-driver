@@ -18,12 +18,12 @@ pubnub.subscribe({
     callback: function(m) {
         console.log(m);
         if (led == null) {
-        	return;
+            return;
         }
         if (m.led == "on") {
-        	led.on();
+            led.on();
         } else {
-        	led.off();
+            led.off();
         }
     }
 });
@@ -39,7 +39,16 @@ util.inherits(Temperature, Device);
 Temperature.prototype.init = function(config) {
     config
         .type('temperature')
-        .monitor('pulse');
+        .state('off')
+        .monitor('pulse')
+        .when('off', {
+            allow: ['turn-on']
+        })
+        .when('on', {
+            allow: ['turn-off']
+        })
+        .map('turn-on', this.turnOn)
+        .map('turn-off', this.turnOff);
 
     var self = this;
     board.on("ready", function() {
@@ -48,7 +57,6 @@ Temperature.prototype.init = function(config) {
             pin: "A1",
             freq: 500
         });
-        led = new five.Led(9);
         sensor.on("data", function(err, value) {
             self.pulse = 100 * this.raw / 1023;
             console.log("sensor reading " + self.pulse);
@@ -91,4 +99,16 @@ Temperature.prototype.init = function(config) {
             led: led
         });
     });
+};
+
+Temperature.prototype.turnOn = function(cb) {
+    this.state = 'on';
+    led.on();
+    cb();
+};
+
+Temperature.prototype.turnOff = function(cb) {
+    this.state = 'off';
+    led.off();
+    cb();
 };
