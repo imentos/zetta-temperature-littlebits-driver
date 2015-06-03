@@ -1,5 +1,5 @@
 var five = require("johnny-five"),
-    board, led, sensor, button, led;
+    board, led, sensor, button;
 board = new five.Board();
 
 var Push = require("parse-push");
@@ -8,6 +8,7 @@ var push = new Push({
     restApiKey: "4V2LbQWJrfMqdipL3QyNSXAf8i3IJrSiMadFjeXH"
 });
 
+// TODO: move pubnub into Parse Cloud
 var pubnub = require('pubnub').init({
     publish_key: 'pub-c-c9bc3d23-4bc7-44a7-a1dc-c2d1f9445a25',
     subscribe_key: 'sub-c-22a3eac0-0971-11e5-bf9c-0619f8945a4f'
@@ -47,7 +48,6 @@ Temperature.prototype.init = function(config) {
             pin: "A1",
             freq: 500
         });
-        led = new five.Led(9);
         sensor.on("data", function(err, value) {
             self.pulse = 100 * this.raw / 1023;
             console.log("sensor reading " + self.pulse);
