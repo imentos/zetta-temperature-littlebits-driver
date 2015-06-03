@@ -1,11 +1,22 @@
 var five = require("johnny-five"),
-    board, led, sensor, button;
+    board, led, sensor, button, led;
 board = new five.Board();
 
 var Push = require("parse-push");
 var push = new Push({
     applicationId: "1guPOUReZkTlAnP3rRloTumvR59YmfLB9VaNqMZi",
     restApiKey: "4V2LbQWJrfMqdipL3QyNSXAf8i3IJrSiMadFjeXH"
+});
+
+var pubnub = require('pubnub').init({
+    publish_key: 'pub-c-c9bc3d23-4bc7-44a7-a1dc-c2d1f9445a25',
+    subscribe_key: 'sub-c-22a3eac0-0971-11e5-bf9c-0619f8945a4f'
+});
+pubnub.subscribe({
+    channel: 'dubai-led',
+    callback: function(m) {
+        console.log(m);
+    }
 });
 
 var Device = require('zetta-device');
@@ -23,6 +34,7 @@ Temperature.prototype.init = function(config) {
 
     var self = this;
     board.on("ready", function() {
+        // temperature
         sensor = new five.Sensor({
             pin: "A1",
             freq: 500
@@ -37,6 +49,15 @@ Temperature.prototype.init = function(config) {
         // wake up notification
         button = new five.Button(0);
         button.on("press", function(value) {
+            pubnub.publish({
+                channel: 'demo_tutorial',
+                message: {
+                    "color": "blue"
+                }
+            });
+
+
+
             console.log("wake up");
             push.sendToChannels(["dubai"], {
                 "alert": "Congratulations! low electriciy usage yesterday."
@@ -61,6 +82,13 @@ Temperature.prototype.init = function(config) {
                     console.error("Oh no it went wrong!: " + error.message);
                 }
             });
+        });
+
+        // led light
+        led = new five.Led(5);
+        //led.strobe(1000);
+        this.repl.inject({
+            led: led
         });
     });
 };
