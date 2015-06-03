@@ -48,6 +48,7 @@ Temperature.prototype.init = function(config) {
             pin: "A1",
             freq: 500
         });
+        led = new five.Led(9);
         sensor.on("data", function(err, value) {
             self.pulse = 100 * this.raw / 1023;
             console.log("sensor reading " + self.pulse);
