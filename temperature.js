@@ -8,26 +8,6 @@ var push = new Push({
     restApiKey: "4V2LbQWJrfMqdipL3QyNSXAf8i3IJrSiMadFjeXH"
 });
 
-// TODO: move pubnub into Parse Cloud
-var pubnub = require('pubnub').init({
-    publish_key: 'pub-c-c9bc3d23-4bc7-44a7-a1dc-c2d1f9445a25',
-    subscribe_key: 'sub-c-22a3eac0-0971-11e5-bf9c-0619f8945a4f'
-});
-pubnub.subscribe({
-    channel: 'dubai-led',
-    callback: function(m) {
-        console.log(m);
-        if (led == null) {
-            return;
-        }
-        if (m.led == "on") {
-            led.on();
-        } else {
-            led.off();
-        }
-    }
-});
-
 var Device = require('zetta-device');
 var util = require('util');
 var Temperature = module.exports = function(options) {
@@ -94,7 +74,6 @@ Temperature.prototype.init = function(config) {
 
         // led light
         led = new five.Led(5);
-        //led.strobe(1000);
         this.repl.inject({
             led: led
         });
