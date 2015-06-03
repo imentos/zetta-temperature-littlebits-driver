@@ -19,7 +19,6 @@ pubnub.subscribe({
         if (led == null) {
         	return;
         }
-        //var result = JSON.parse(m);
         if (m.led == "on") {
         	led.on();
         } else {
