@@ -7,6 +7,5 @@ zetta({
         agent: agent
     })
     .use(Temperature)
-    .use(LED)
     .link('https://hello-zetta.herokuapp.com/')
     .listen(1337);
