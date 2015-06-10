@@ -48,7 +48,7 @@ Temperature.prototype.init = function(config) {
         button.on("press", function(value) {
             console.log("wake up");
             push.sendToChannels(["dubai"], {
-                "alert": "Congratulations! low electriciy usage yesterday."
+                "alert": "Congratulations! You have earned Energy Star Award \ue131 for low Electricity usage Yesterday"
             }, function(error, data) {
                 if (error) {
                     console.error("Oh no it went wrong!: " + error.message);
@@ -63,7 +63,7 @@ Temperature.prototype.init = function(config) {
         button.on("press", function(value) {
             console.log("late bus");
             push.sendToChannels(["dubai"], {
-                "alert": "The bus late because of accident.",
+                "alert": "Bus is late due to an accident on your Route",
                 category: "BUS_LATE_CATEGORY"
             }, function(error, data) {
                 if (error) {
